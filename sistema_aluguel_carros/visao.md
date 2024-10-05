@@ -80,50 +80,6 @@ Esse sistema é uma excelente maneira de aplicar e expandir seus conhecimentos e
 
 ### **Estrutura do Sistema de Aluguel de Carros**
 
-#### **1. Entidades Principais**
-
-1. **Usuário**
-   - **id**: Integer (Primary Key)
-   - **nome**: String
-   - **email**: String (Unique)
-   - **senha**: String (Hashed)
-   - **tipo**: Enum (cliente, funcionário, administrador)
-   - **telefone**: String
-
-2. **Carro**
-   - **id**: Integer (Primary Key)
-   - **marca**: String
-   - **modelo**: String
-   - **ano**: Integer
-   - **placa**: String (Unique)
-   - **disponibilidade**: Boolean
-   - **preço_diaria**: Decimal
-   - **categoria**: String (ex: SUV, Sedan, Hatch)
-
-3. **Locação**
-   - **id**: Integer (Primary Key)
-   - **usuario_id**: Integer (Foreign Key)
-   - **carro_id**: Integer (Foreign Key)
-   - **data_inicio**: DateTime
-   - **data_fim**: DateTime
-   - **status**: Enum (ativa, finalizada, cancelada)
-   - **total**: Decimal
-
-4. **Pagamento**
-   - **id**: Integer (Primary Key)
-   - **locacao_id**: Integer (Foreign Key)
-   - **data_pagamento**: DateTime
-   - **valor**: Decimal
-   - **status**: Enum (pago, pendente, falhado)
-
-#### **2. Relacionamentos**
-
-- **Usuário** tem muitas **Locações** (1:N)
-- **Locação** pertence a um **Usuário** (N:1)
-- **Locação** refere-se a um **Carro** (N:1)
-- **Carro** pode estar em muitas **Locações** (1:N)
-- **Locação** tem um **Pagamento** (1:1)
-- **Pagamento** pertence a uma **Locação** (1:1)
 
 #### **3. Endpoints da API**
 
