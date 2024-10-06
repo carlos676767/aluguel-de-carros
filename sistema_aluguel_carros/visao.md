@@ -85,13 +85,13 @@ Esse sistema é uma excelente maneira de aplicar e expandir seus conhecimentos e
 
 1. **Usuários**
    - `POST /api/usuarios`: Criar um novo usuário
-   - `GET /api/usuarios`: Listar todos os usuários (admin)
+   - `GET /api/usuarios`: Listar todos os usuários (admin)[x]
    - `GET /api/usuarios/:id`: Obter detalhes de um usuário
    - `PUT /api/usuarios/:id`: Atualizar informações de um usuário
-   - `DELETE /api/usuarios/:id`: Deletar um usuário (admin)
+   - `DELETE /api/usuarios/:id`: Deletar um usuário (admin)[x]
 
 2. **Carros**
-   - `POST /api/carros`: Adicionar um novo carro (admin)
+   - `POST /api/carros`: Adicionar um novo carro (admin)[x]
    - `GET /api/carros`: Listar todos os carros
    - `GET /api/carros/:id`: Obter detalhes de um carro
    - `PUT /api/carros/:id`: Atualizar informações de um carro (admin)

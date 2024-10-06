@@ -23,7 +23,7 @@ class Carros {
 
   static async httpRequest(item) {
     try {
-      const request = await fetch("http://localhost:8080/api/carros", {
+      const request = await fetch("http://localhost:8080/api/carros?acesso=9KP1S4QM", {
         method: "POST",
         body: this.objectValues(),
       });
