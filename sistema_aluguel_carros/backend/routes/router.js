@@ -1,4 +1,6 @@
 const express = require("express").Router();
+
+const AtulizarCarroController = require("../controllers/auth/AtulizarCarroController");
 const {
   Multer,
   Carro,
@@ -19,4 +21,7 @@ express.delete('/api/usuariosDelete/:id', Usuarios.rotaApagarUsuarios)
 
 express.use(deleteCarroController.verificarAcesso)
 express.delete('/api/carros/:id', deleteCarroController.routerCar)
+
+express.use(AtulizarCarroController.verificarAcesso)
+express.put('/api/carros', AtulizarCarroController.router)
 module.exports = express;

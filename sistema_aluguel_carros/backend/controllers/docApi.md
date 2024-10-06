@@ -1,7 +1,84 @@
-rota http://localhost:8080/api/usuarios?acesso=senha serve para os adm acessar todo os usuarios.
 
-rota post http://localhost:8080/api/carros?acesso=senha serve o postar o carro.
+# Documentação da API
 
-rota delete http://localhost:8080/api/usuariosDelete/5?acesso=senha para apagar o usuario(adm) o acesso e a chave de acesso.
+## 1. Acesso aos Usuários
 
-rota delete http://localhost:8080/api/carros/5?acesso=senha
+**Rota:**  
+`GET http://localhost:8080/api/usuarios?acesso=senha`
+
+**Descrição:**  
+Esta rota permite que administradores acessem a lista de todos os usuários cadastrados no sistema.
+
+**Parâmetros:**
+- `acesso`: (string) Chave de acesso para autenticação.
+
+---
+
+## 2. Cadastro de Carros
+
+**Rota:**  
+`POST http://localhost:8080/api/carros?acesso=senha`
+
+**Descrição:**  
+Esta rota é utilizada para adicionar um novo carro ao sistema.
+
+**Parâmetros:**
+- `acesso`: (string) Chave de acesso para autenticação.
+
+**Corpo da Requisição:**  
+O corpo deve conter as informações do carro a ser cadastrado (por exemplo, marca, modelo, ano, etc.).
+
+---
+
+## 3. Exclusão de Usuários
+
+**Rota:**  
+`DELETE http://localhost:8080/api/usuariosDelete/{id}?acesso=senha`
+
+**Descrição:**  
+Esta rota permite que administradores apaguem um usuário específico do sistema.
+
+**Parâmetros:**
+- `id`: (integer) O ID do usuário a ser excluído.
+- `acesso`: (string) Chave de acesso para autenticação.
+
+---
+
+## 4. Exclusão de Carros
+
+**Rota:**  
+`DELETE http://localhost:8080/api/carros/{id}?acesso=senha`
+
+**Descrição:**  
+Esta rota permite que administradores excluam um carro específico do sistema.
+
+**Parâmetros:**
+- `id`: (integer) O ID do carro a ser excluído.
+- `acesso`: (string) Chave de acesso para autenticação.
+
+---
+
+## 5. Atualização de Carros
+
+**Rota:**  
+`PUT http://localhost:8080/api/carros?acesso=key`
+
+**Descrição:**  
+Esta rota é utilizada para atualizar as informações de um carro existente no sistema.
+
+**Parâmetros:**
+- `acesso`: (string) Chave de acesso para autenticação.
+
+**Corpo da Requisição:**  
+O corpo deve conter os seguintes campos:
+- `id`: (string) O ID do carro a ser atualizado.
+- `coluna`: (string) O nome da coluna a ser atualizada.
+- `novoValor`: (string) O novo valor a ser atribuído à coluna.
+
+### Exemplo do Corpo da Requisição:
+```json
+{
+    "id": "1",
+    "coluna": "3",
+    "novoValor": "vdd"
+}
