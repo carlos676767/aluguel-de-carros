@@ -35,3 +35,4 @@ Desktop.ini
 # Outros arquivos temporários
 *.tmp
 *.temp
+.config.json

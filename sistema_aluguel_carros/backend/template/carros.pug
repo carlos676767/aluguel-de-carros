@@ -1,0 +1,75 @@
+doctype html
+html
+  head
+    title Lista de Carros
+    link(rel="stylesheet" href="")
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+      }
+
+      ul.carros-lista {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      li.carro-item {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 300px;
+        text-align: center;
+      }
+
+      li.carro-item img {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .carro-detalhes {
+        padding: 15px;
+      }
+
+      .carro-detalhes h2 {
+        font-size: 1.5em;
+        margin: 10px 0;
+      }
+
+      .carro-detalhes p {
+        margin: 5px 0;
+        font-size: 1em;
+      }
+
+      .carro-detalhes p:nth-child(3) {
+        font-weight: bold;
+        color: #27ae60;
+      }
+
+
+
+  body
+    h1 Lista de Carros Disponíveis
+    ul.carros-lista
+      each carro in carros
+        li.carro-item
+          img(src=carro.imagemUrl alt=`Imagem do ${carro.marca} ${carro.modelo}`)
+          div.carro-detalhes
+            h2 #{carro.marca} #{carro.modelo} (#{carro.ano})
+            p Placa: #{carro.placa}
+            p Disponibilidade: #{carro.disponibilidade}
+            p Preço da diária: R$ #{carro.precoDiaria.toFixed(2)}

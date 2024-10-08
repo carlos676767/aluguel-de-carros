@@ -7,7 +7,10 @@ const {
 } = require("../controllers/auth/CadastrodeCarrosController");
 const deleteCarroController = require("../controllers/auth/deleteCarroController");
 const { UsuarioAuthenticator, Usuarios, UsuarioConsultar } = require("../controllers/auth/GestãodeUsuáriosController");
+const Usuario = require("../controllers/usuarioController");
 
+express.post('/api/usuarios', Usuario.router)
+express.post('/api/codigoConfirmar', Usuario.adicionarUsersDatabase)
 
 express.use(Carro.verificarAcesso)
 express.post("/api/carros",Multer.multerConfig().single("file"),Carro.router);
@@ -24,4 +27,6 @@ express.delete('/api/carros/:id', deleteCarroController.routerCar)
 
 express.use(AtulizarCarroController.verificarAcesso)
 express.put('/api/carros', AtulizarCarroController.router)
+
+
 module.exports = express;

@@ -3,19 +3,25 @@ class Express {
   static bodyparser = require("body-parser");
   static router = require("./routes/router");
   static expressCponnect() {
-    const expresApi = this.api();
+    const app = this.api();
 
-    expresApi.use(this.bodyparser.json());
+    app.use(this.bodyparser.json());
 
-    expresApi.use(this.api.static("image"));
-    expresApi.use(this.router);
-
+    app.use(this.api.static("image"));
+    app.use(this.router);
+    app.set('view engine', 'pug')
+    app.set('views', './template');
+   
     const port = process.env.PORT || 8080;
-    expresApi.listen(port, () => {
+    app.listen(port, () => {
       console.log(`servidor rodando ${port}`);
+      
     });
   }
 }
 
 Express.expressCponnect();
 //mudar po caminho no cadastro da img
+
+
+

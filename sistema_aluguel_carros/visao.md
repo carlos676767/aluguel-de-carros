@@ -94,9 +94,9 @@ Esse sistema é uma excelente maneira de aplicar e expandir seus conhecimentos e
    - `POST /api/carros`: Adicionar um novo carro (admin)[x]
    - `GET /api/carros`: Listar todos os carros
    - `GET /api/carros/:id`: Obter detalhes de um carro
-   - `PUT /api/carros/:id`: Atualizar informações de um carro (admin)
+   - `PUT /api/carros/:id`: Atualizar informações de um carro (admin)[x]
    - `DELETE /api/carros/:id`: Deletar um carro (admin)[x]
-
+ 
 3. **Locações**
    - `POST /api/locacoes`: Criar uma nova locação
    - `GET /api/locacoes`: Listar todas as locações (admin)

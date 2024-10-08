@@ -82,3 +82,11 @@ O corpo deve conter os seguintes campos:
     "coluna": "3",
     "novoValor": "vdd"
 }
+```
+
+
+
+### cadastrar usuario###
+
+Rota /api/usuarios , valores para enviar nome, email, senha, telefone, cpf, code apos isso usar a rota /api/codigoConfirmar com o objeto codigo.
+
