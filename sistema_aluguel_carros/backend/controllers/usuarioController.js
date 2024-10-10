@@ -1,9 +1,7 @@
 class Usuario {
   static db = require("./DB/database");
-  static jwt = require("jsonwebtoken");
   static NodeMailer = require("../email/email");
   static cache = require("../cache/cache");
-  static uuid = require("uuid");
   static config = require("../config.json");
 
   static async router(req, res) {
@@ -48,7 +46,7 @@ class Usuario {
         status: false,
       });
     }
-
+    
     if (nome.length < 3) {
       return res.status(400).send({
         msg: `Atenção! O nome precisa ter no minimo tres de comprimento.`,
@@ -74,7 +72,6 @@ class Usuario {
   static async colocarDadosEmCache(nome, email, senha, telefone, cpf, res) {
     try {
       const emailExiste = Usuario.verificarEmailExiste(email);
-      console.log(emailExiste);
       
       if (emailExiste) {
         return res.status(400).send({
@@ -88,14 +85,14 @@ class Usuario {
       }
 
       const code = this.NodeMailer.randomCod();
-      console.log(code);
+
       
       const { response } = await this.NodeMailer.enviarEmail(email, code);
 
       if (response.match(/250\sOK/)[0]) {
         const dadosUser = { nome, email, senha, telefone, cpf, code };
-        this.cache.cachedDados().set("dadosTemp", dadosUser, 3000);
-
+        this.cache.set('dados', dadosUser, 3000)
+       
         return res.status(200).send({
           msg: "O e-mail de confirmação foi enviado com sucesso.",
           info: {
@@ -105,7 +102,10 @@ class Usuario {
           },
         });
       }
+
     } catch (error) {
+      console.log(error);
+      
       res.status(500).send({
         msg: "Ocorreu um erro ao tentar enviar o e-mail. Por favor, tente novamente mais tarde.",
         info: {
@@ -119,76 +119,11 @@ class Usuario {
 
   static verificarEmailExiste(email) {
     return Boolean(
-      this.db
-        .dbQuery()
-        .prepare(`SELECT * FROM PESSOAS WHERE EMAIL_USUARIO = ?`)
-        .get(email)
+      this.db.dbQuery().prepare(`SELECT * FROM PESSOAS WHERE EMAIL_USUARIO = ?`).get(email)
     );
   }
 
-  static adicionarUsersDatabase(req, res) {
-    try {
-      const { codigo } = req.body;
-      console.log(codigo, 's');
-      
-      const cache = this.cache.cachedDados().get("dadosTemp");
-console.log(cache);
 
-      if (cache === undefined) {
-       
-        return res.status(410).send({
-          msg: "O tempo de expiração para confirmar o código passou. O código é válido por apenas 5 minutos.",
-          info: {
-            status: "Código expirado",
-            acao: "Confirmação de código",
-            recomendacao: "Por favor, solicite um novo código para continuar.",
-          },
-        });
-      }
-
-      const { code } = cache;
-      if (code == codigo) {
-        Usuario.insertValueDb(cache)
-        return res.status(200).send({
-          msg: "O código informado é válido e corresponde ao código salvo. Você pode usá-lo para gerar o JWT.",
-          info: {
-            status: "Código válido",
-            acao: "Verificação de código",
-            usuarioCadastrado: true,
-            token: Usuario.jwtGerar(),
-          },
-        });
-      }
-    } catch (error) {
-      console.log(error);
-      
-      res.status(500).send({
-        msg: "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.",
-        info: {
-          status: "Erro interno",
-          acao: "Operação falhou",
-          recomendacao: "Se o problema persistir, entre em contato com o suporte.",
-        },
-      });
-    }
-  }
-
-
-  static insertValueDb(cache){
-    console.log(cache);
-    
-    const {nome, email, senha, telefone, cpf} = cache
-    const query = 'INSERT INTO PESSOAS(PESSOAS, EMAIL_USUARIO , SENHA, TELEFONE,CPF) VALUES(?, ? , ? , ?, ?)'
-    const changes = this.db.dbQuery().prepare(query).run(nome, email, senha, telefone, cpf)
-    console.log(changes);
-    
-    
-  }
-
-  static jwtGerar() {
-    const idGerar = this.uuid.v7();
-    return this.jwt.sign(idGerar, this.config.keyJwt, { expiresIn: "120s" });
-  }
 }
 
 module.exports = Usuario;

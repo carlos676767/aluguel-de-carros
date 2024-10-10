@@ -37,22 +37,10 @@ class Carro {
   static #fs = require('fs')
   static #path = require("path")
 
-  static verificarAcesso(req, res, next) {
-    const configJson = require('../../niveisAcesso.json')
-    const acesso = req.query.acesso
-
-    if (!acesso || acesso !== configJson.admin) {
-      res.status(401).send({ msg: 'Acesso não autorizado, verifique o parâmetro.' });
-      return;
-    }
-
-    next()
-  }
-
   static router(req, res) {
     try {
       const { modelo, marca, precoDiaria, disponibilidade, PLACA, ANO } = req.body;
-      console.log(req.body);
+      console.log(req.body, `dados`);
       
       Carro.validacoesCarro(modelo, marca, precoDiaria, disponibilidade, PLACA, ANO, req.file)
       Carro.adicionarCarrosDb(modelo, marca, precoDiaria, req.file.filename, disponibilidade, PLACA, ANO, res)

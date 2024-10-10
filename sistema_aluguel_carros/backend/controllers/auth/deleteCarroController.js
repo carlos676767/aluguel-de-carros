@@ -2,19 +2,6 @@ class DeleteCarroController {
   static #db = require("../DB/database");
   static #fs = require("fs");
   static #path = require("path");
-  static verificarAcesso(req, res, next) {
-    const configJson = require("../../niveisAcesso.json");
-    const acesso = req.query.acesso;
-
-    if (!acesso || acesso !== configJson.admin) {
-      res.status(401).send({
-        msg: "Acesso não autorizado. Verifique se o parâmetro fornecido está correto ou se você possui as credenciais adequadas.",
-      });
-      return;
-    }
-
-    next();
-  } 
 
   static routerCar(req, res) {
     try {
@@ -28,9 +15,7 @@ class DeleteCarroController {
 
   static verificarId(id, query) {
     if (!id || !query) {
-        throw new Error(
-          "O ID ou o parâmetro de consulta (query) fornecido é inválido ou não foi informado. Por favor, verifique os dados e forneça valores válidos."
-        );
+        throw new Error(  "O ID ou o parâmetro de consulta (query) fornecido é inválido ou não foi informado. Por favor, verifique os dados e forneça valores válidos."  );
      }      
   }
 
@@ -41,7 +26,7 @@ class DeleteCarroController {
       if (query != undefined) {
 
         const { IMAGEM } = query;
-        this.fs.unlinkSync(this.#path.join(__dirname, "../../image", IMAGEM));
+        this.#fs.unlinkSync(this.#path.join(__dirname, "../../image", IMAGEM));
 
         const { changes } = this.#db.dbQuery().prepare("DELETE FROM CARROS WHERE ID = ?").run(id);
 

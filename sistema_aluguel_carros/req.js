@@ -30,7 +30,7 @@
 
     body: JSON.stringify({
       nome: "jwtbrvhgvvghvg",
-      email: "ana.jnjygytggtyhj@example.com",
+      email: "ana.fth88hhfft@example.com",
       senha: `gcfccfcfcf6@H`,
       telefone: '11987654321',
       cpf: '76355762086',

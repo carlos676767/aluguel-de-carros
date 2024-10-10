@@ -89,4 +89,10 @@ O corpo deve conter os seguintes campos:
 ### cadastrar usuario###
 
 Rota /api/usuarios , valores para enviar nome, email, senha, telefone, cpf, code apos isso usar a rota /api/codigoConfirmar com o objeto codigo.
+envie no objeto o nome codigo.
+
+
+rota /pagamentos cria um pagamento passando o nome dos carros
+/webhook para notificaoes do mercado pago de pagamento.
+
 

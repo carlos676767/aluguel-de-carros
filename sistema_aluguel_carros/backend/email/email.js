@@ -1,3 +1,5 @@
+const codigoEmail = require("./emailConfirmarSenha");
+
 class NodeMailer {
   static #email = require("nodemailer");
   static config = require('../config.json')
@@ -16,11 +18,11 @@ class NodeMailer {
       from: this.config.email,
       to: paraQuem,
       subject: "✉️ Confirmação de E-mail Necessária!",
-      text: `confirmarEmail, codigo ${code}`,
+      html: codigoEmail(code),
     });
   }
 
-
+  
   static randomCod(){
     return  Array.from(Array(10).keys()).map(data => Math.floor(Math.random() * 50)).join('')
   }

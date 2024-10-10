@@ -4,6 +4,10 @@
         headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ codigo: 4324484635141961 }),
+          body: JSON.stringify({ codigo: '2643221594628344833' }),
     })
+    const re4sr = await data.json()
+    console.log(re4sr);
+    
 })()
+

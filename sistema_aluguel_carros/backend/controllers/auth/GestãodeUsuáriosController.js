@@ -1,19 +1,6 @@
 const Database = require("../DB/database")
 const db = require("../DB/database");
 
-class UsuarioAuthenticator {
-  static verificarAcesso(req,res, next){
-    const  configJson = require('../../niveisAcesso.json')
-    const acesso = req.query.acesso
-    
-    if (!acesso || acesso !== configJson.admin) {
-        res.status(401).send({ msg: 'Acesso não autorizado, verifique o parâmetro.' });
-        return;
-    }
-
-    next()
-  }
-}
 
 
 
@@ -29,13 +16,10 @@ class Usuarios {
   }
 
  
-
-
   static validacoes(id){
     if (!id) {
       throw new Error("Por favor envie um id.");
     }
-
   }
 
   static  async apagarPerson(id, res){
@@ -116,4 +100,4 @@ class UsuarioConsultar {
   }
 }
 
-module.exports = {UsuarioConsultar, Usuarios,UsuarioAuthenticator };
+module.exports = {UsuarioConsultar, Usuarios };

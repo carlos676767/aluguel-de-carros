@@ -8,10 +8,11 @@ class Express {
     app.use(this.bodyparser.json());
 
     app.use(this.api.static("image"));
+    app.use(this.api.static('pages'))
     app.use(this.router);
     app.set('view engine', 'pug')
     app.set('views', './template');
-   
+
     const port = process.env.PORT || 8080;
     app.listen(port, () => {
       console.log(`servidor rodando ${port}`);
