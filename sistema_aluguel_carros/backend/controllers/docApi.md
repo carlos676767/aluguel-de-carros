@@ -96,3 +96,7 @@ rota /pagamentos cria um pagamento passando o nome dos carros
 /webhook para notificaoes do mercado pago de pagamento.
 
 
+
+//    http://localhost:8080/api/trocarSenha essa rota serve para trocar a senha, veja o arquivo paginaTrocarSenha.js
+
+

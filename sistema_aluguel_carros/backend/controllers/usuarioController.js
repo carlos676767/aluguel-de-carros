@@ -1,10 +1,10 @@
 class Usuario {
   static db = require("./DB/database");
-  static NodeMailer = require("../email/email");
+  static NodeMailer = require("../email/emailConfirmarSenhaEnviar");
   static cache = require("../cache/cache");
   static config = require("../config.json");
 
-  static async router(req, res) {
+  static async routerUser(req, res) {
     try {
       const { nome, email, senha, telefone, cpf } = req.body;
       Usuario.validacoes(nome, email, senha, telefone, cpf, res);

@@ -6,6 +6,7 @@ class Express {
     const app = this.api();
 
     app.use(this.bodyparser.json());
+    app.use(this.api.urlencoded({ extended: true }));
 
     app.use(this.api.static("image"));
     app.use(this.api.static('pages'))

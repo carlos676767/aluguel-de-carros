@@ -84,8 +84,6 @@ class Carro {
             descricao: "O carro foi cadastrado no sistema com sucesso.",
           },
         });
-
-        this.#sql.dbQuery().close()
         return
       }
 
@@ -100,18 +98,19 @@ class Carro {
       });
 
     } catch (error) {
-
       res.status(500).send({
         msg: "Ocorreu um erro ao cadastrar um carro,  Tente novamente mais tarde.",
         error: error.message,
       });
+     
+    }finally{
       this.#sql.dbQuery().close()
     }
   }
 
   static deleteImg(img) {
     return this.#fs.unlinkSync(this.#path.join(__dirname, "../../image", img))
-  }
+  };
 };
 
 

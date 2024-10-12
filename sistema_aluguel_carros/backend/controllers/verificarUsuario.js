@@ -13,7 +13,6 @@ class UserCodeExist {
       const {changes} = UserCodeExist.#insertValueDb(getDadosNoCache);
 
       if (changes > 0) {
-        database.dbQuery().close()
         return res.cookie('token',  UserCodeExist.#jwtGerar(),{ 
           httpOnly: true, 
           secure: false,  
@@ -32,9 +31,6 @@ class UserCodeExist {
       };
 
     } catch (error) {
-      console.log(error);
-      
-      database.dbQuery().close()
       res.status(500).send({
         msg: "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.",
         info: {
@@ -43,7 +39,9 @@ class UserCodeExist {
           recomendacao: "Se o problema persistir, entre em contato com o suporte.",
         },
       });
-    };
+    }finally{
+      database.dbQuery().close()
+    }
   };
 
   static #verificarCache(res, codigo) {

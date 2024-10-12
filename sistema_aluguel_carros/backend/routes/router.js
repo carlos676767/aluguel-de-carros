@@ -1,4 +1,4 @@
-const express = require("express").Router();
+const express = require("express").Router()
 
 const Middlare = require("../config/middleVerifyApiKey");
 const AtulizarCarroController = require("../controllers/auth/AtulizarCarroController");
@@ -9,15 +9,21 @@ const {
 const deleteCarroController = require("../controllers/auth/deleteCarroController");
 const { UsuarioAuthenticator, Usuarios, UsuarioConsultar } = require("../controllers/auth/GestãodeUsuáriosController");
 const MercadoPagoPagamentos = require("../controllers/pagamentoController");
-const SenhaController = require("../controllers/trocarSenhaController");
+
+const {SenhaController, TrocarSenha} = require("../controllers/trocarSenhaController");
 const Usuario = require("../controllers/usuarioController");
 const UserCodeExist = require("../controllers/verificarUsuario");
 
-express.post('/api/usuarios', Usuario.router)
+
+express.post('/api/usuarios', Usuario.routerUser)
 express.post('/api/codigoConfirmar', UserCodeExist.router)
 express.post('/pagamentos',MercadoPagoPagamentos.routerPay)
 express.post('/webhook', MercadoPagoPagamentos.routerWebhook)
 express.post('/verificarEmail', SenhaController.routerDatabaseEmail)
+
+express.use(TrocarSenha.middlareVerificarTaoken)
+express.post('/api/trocarSenha', TrocarSenha.routerTrocarSenha)
+
 express.use(Middlare.verifyValue);
 express.post("/api/carros",Multer.multerConfig().single("file"),Carro.router);
 

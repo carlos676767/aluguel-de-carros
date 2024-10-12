@@ -11,7 +11,7 @@ class NodeMailer {
         pass: this.config.senha,
       },
     });
-  }
+  };
 
   static async enviarEmail(paraQuem,code) {
     return await this.#nodeMaileConfig().sendMail({
@@ -20,12 +20,12 @@ class NodeMailer {
       subject: "✉️ Confirmação de E-mail Necessária!",
       html: codigoEmail(code),
     });
-  }
+  };
 
   
   static randomCod(){
     return  Array.from(Array(10).keys()).map(data => Math.floor(Math.random() * 50)).join('')
-  }
-}
+  };
+};
 
 module.exports = NodeMailer

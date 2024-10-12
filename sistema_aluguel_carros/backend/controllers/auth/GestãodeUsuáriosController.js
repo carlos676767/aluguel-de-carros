@@ -28,14 +28,14 @@ class Usuarios {
       const {changes} = db.dbQuery().prepare(query).run(id)
 
       if (changes > 0) {
-        res.status(200).send({
+       return res.status(200).send({
           msg: `A pessoa do ID  ${id} foi deletado com sucesso.`,
           info: {
             idPessoa: id,
             status: true,
           },
         });
-        return
+        
       }
 
       res.status(404).send({
@@ -45,14 +45,14 @@ class Usuarios {
           status: "Não encontrado",
         },
       });
-
-      db.dbQuery().close()
     } catch (error) {
-      db.dbQuery().close()
       res.status(500).send({
         msg: "Ocorreu um erro interno ao tentar a pessoa. Tente novamente mais tarde.",
         error: error.message,
       });
+      
+    }finally{
+      db.dbQuery().close()
     }
   }
 }
@@ -80,6 +80,7 @@ class UsuarioConsultar {
         },
       });
 
+    }finally{
       db.dbQuery().close()
     }
   }

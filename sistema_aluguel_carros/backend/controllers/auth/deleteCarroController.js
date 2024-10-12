@@ -31,7 +31,7 @@ class DeleteCarroController {
         const { changes } = this.#db.dbQuery().prepare("DELETE FROM CARROS WHERE ID = ?").run(id);
 
         if (changes > 0) {
-          res.status(200).send({
+          return res.status(200).send({
             msg: `O carro do ID  ${id} foi deletado com sucesso.`,
             info: {
               idCarro: id,
@@ -39,9 +39,7 @@ class DeleteCarroController {
             },
           });
         }
-
-        this.#db.dbQuery().close()
-        return;
+        
       }
 
       res.status(404).send({
@@ -52,14 +50,14 @@ class DeleteCarroController {
         },
       });
 
-      this.#db.dbQuery().close();
     } catch (error) {
       res.status(500).send({
         msg: "Ocorreu um erro interno ao tentar a pessoa. Tente novamente mais tarde.",
         error: error.message,
       });
 
-      this.#db.dbQuery().close();
+    }finally{
+      this.#db.dbQuery().close()
     }
   }
 }

@@ -77,11 +77,10 @@ class MercadoPagoPagamentos {
 
     if (getId.status == 'approved') {
       console.log('aprovado');
-    }
-
-  } catch (error) {
-   
+    };
     
+  } catch (error) {
+
   }
   
   }

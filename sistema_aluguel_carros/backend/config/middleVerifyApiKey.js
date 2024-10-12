@@ -46,7 +46,7 @@ class Middlare {
         recomendacao: "Certifique-se de que a chave API inserida está correta e tente novamente.",
       },
     });
-  }
-}
+  };
+};
 
 module.exports = Middlare;
