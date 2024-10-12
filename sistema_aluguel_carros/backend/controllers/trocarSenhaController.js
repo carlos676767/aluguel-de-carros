@@ -112,7 +112,8 @@ class TrocarSenha  {
     const query =`UPDATE PESSOAS SET SENHA =  ? WHERE EMAIL_USUARIO = ?`
     console.log(email,senha);
     
-    const {changes} = myDatabase.dbQuery(query).prepare(query).run(senha,email)
+    const {changes} = myDatabase.dbQuery(query)
+    .prepare(query).run(senha,email)
     
     if (changes >= 1) {
      return res.status(200).send({
@@ -151,13 +152,10 @@ class TrocarSenha  {
       throw new Error("A senha deve ter pelo menos 8 caracteres.");
     }
 
-    // if (!regex.test(senha)) {
-    //   throw new Error("A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial." );
-    // }
+    if (!regex.test(senha)) {
+      throw new Error("A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial." );
+    }
   };
 };
-
-
-
 
 module.exports =  {SenhaController, TrocarSenha } ;
